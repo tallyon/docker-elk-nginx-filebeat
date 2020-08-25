@@ -2,46 +2,9 @@
 
 This is extended version from [ELK on Docker](https://github.com/deviantony/docker-elk) with Filebeat plugin. Filebeat takes in charge of streaming log file from nginx to Logstash then processing it and visualize to Kibana.
 
-## What 's insides 
+## Docker compose overview
 
-```
-├── app
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── src
-│   │   └── index.js
-│   └── yarn.lock
-├── elasticsearch
-│   ├── config
-│   │   └── elasticsearch.yml
-│   └── Dockerfile
-├── filebeat
-│   ├── config
-│   │   └── filebeat.yml
-│   └── Dockerfile
-├── kibana
-│   ├── config
-│   │   └── kibana.yml
-│   └── Dockerfile
-├── logstash
-│   ├── config
-│   │   └── logstash.yml
-│   ├── Dockerfile
-│   └── pipeline
-│       └── nginx.conf
-├── nginx
-│   ├── config
-│   │   └── site.conf
-│   ├── Dockerfile
-│   └── log
-│       ├── access.log
-│       └── error.log
-├── docker-compose.yml
-├── LICENSE
-└── README.md
-```
-
-- App: minimal simple Express app
+- App: docker image provided via **.env**
 - Nginx: web server for app.
 - Elasticsearch: containing build image and configure for Elasticsearch
 - Filebeat: containing build image and configure for Filebeat to streaming log of Nginx to Logstash
@@ -50,10 +13,14 @@ This is extended version from [ELK on Docker](https://github.com/deviantony/dock
 
 ## Getting Started
 
+To configure the app image and API port as well as ELK version edit **.env** file
+
 To run this stack, run the following command
+
 ```bash
 docker-compose up
 ```
+
 Then go to `http://localhost:5601` to see your data in Kibana
 
 Default Kibana user information
