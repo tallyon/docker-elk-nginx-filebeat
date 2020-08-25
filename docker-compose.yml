@@ -67,20 +67,16 @@ services:
       - elasticsearch
 
   app:
-    build : ./app
-    volumes:
-      - ./app/:/usr/src/app
-      - /usr/src/app/node_modules/ # make node_module empty in container
-    command: npm start
+    image: $APP_IMAGE
     ports:
-      - "3000:3000"
+      - $APP_PORT:$APP_PORT
     networks:
       - elk
 
   nginx:
     build: ./nginx
     volumes:
-      - ./nginx/config:/etc/nginx/conf.d
+      #- ./nginx/config:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
     ports:
       - "80:80"
@@ -91,6 +87,8 @@ services:
       - app
     networks:
       - elk
+    environment: 
+      - APP_PORT
 
   filebeat:
     build: ./filebeat
